@@ -1,0 +1,27 @@
+{
+  "name": "@allan/eslint-config",
+  "version": "1.0.0",
+  "description": "Allan's shared ESLint flat config",
+  "type": "module",
+  "exports": "./index.js",
+  "files": [
+    "index.js"
+  ],
+  "license": "MIT",
+  "repository": "github:Allan0x0/eslint-config",
+  "scripts": {
+    "test": "node check.js"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "peerDependencies": {
+    "eslint": "^9.0.0 || ^10.0.0"
+  },
+  "dependencies": {
+    "eslint-plugin-functional": "^10.0.1",
+    "typescript-eslint": "^8.70.1"
+  },
+  "devDependencies": {
+    "eslint": "10.11.0",
+    "typescript": "~6.0.3"
+  }
+}
