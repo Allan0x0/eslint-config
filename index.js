@@ -51,7 +51,7 @@ export const testHygiene = [
     languageOptions: tsParser,
     plugins: { playwright },
     rules: {
-      "playwright/no-skipped-test": "error",
+      "playwright/no-skipped-test": ["error", { disallowFixme: true }],
       "playwright/no-focused-test": "error",
       "playwright/no-wait-for-timeout": "error",
     },

@@ -10,7 +10,7 @@ Shared ESLint flat config (ESLint 9 and 10). It turns the mechanical review comm
 | `@eslint-community/eslint-comments/require-description` | all files | `eslint-disable` with no reason | Add `-- reason` after the directive |
 | `@eslint-community/eslint-comments/no-unlimited-disable` | all files | bare `/* eslint-disable */` | Name the rules you disable |
 | `vitest/no-disabled-tests`, `vitest/no-focused-tests` | Vitest tests | `.skip`, `.only`, `xit`, `fit` | Fix or delete the test |
-| `playwright/no-skipped-test`, `playwright/no-focused-test` | Playwright specs | `test.skip`, `test.only` | Fix or delete the test |
+| `playwright/no-skipped-test`, `playwright/no-focused-test` | Playwright specs | `test.skip`, `test.fixme`, `test.only` | Fix or delete the test |
 | `playwright/no-wait-for-timeout` | Playwright specs | `page.waitForTimeout()` | Wait for a locator, response or event |
 | `no-restricted-syntax` | tests and test runner configs | `retry` / `retries` keys | Fix the flake's root cause (missing await, race, shared state, real timers or network) |
 
@@ -94,5 +94,6 @@ Lints `fixtures/` with the full config and then with `testHygiene` alone. Each r
 
 ## Changelog
 
+- 1.1.1: `playwright/no-skipped-test` also bans `test.fixme`.
 - 1.1.0: test hygiene preset (Vitest, Playwright, retries), `_unsafeUnwrap` ban, warning-comment ban, eslint-disable descriptions; `base` and `testHygiene` exports; per-rule fixtures; CI on ESLint 9 and 10.
 - 1.0.0: `functional/no-throw-statements` with edge-file override.

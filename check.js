@@ -11,6 +11,7 @@ const testFindings = [
   ["e2e/checkout.spec.ts:4", "playwright/no-skipped-test"],
   ["e2e/checkout.spec.ts:5", "playwright/no-focused-test"],
   ["e2e/checkout.spec.ts:6", "playwright/no-wait-for-timeout"],
+  ["e2e/checkout.spec.ts:8", "playwright/no-skipped-test"],
   ["playwright.config.ts:1", "no-restricted-syntax", retry],
   ["test/disabled.test.ts:4", "vitest/no-disabled-tests"],
   ["test/disabled.test.ts:5", "vitest/no-focused-tests"],
