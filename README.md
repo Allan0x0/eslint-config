@@ -10,11 +10,12 @@ Shared ESLint flat config (ESLint 9 and 10). It turns the mechanical review comm
 | `@eslint-community/eslint-comments/require-description` | all files | `eslint-disable` with no reason | Add `-- reason` after the directive |
 | `@eslint-community/eslint-comments/no-unlimited-disable` | all files | bare `/* eslint-disable */` | Name the rules you disable |
 | `vitest/no-disabled-tests`, `vitest/no-focused-tests` | Vitest tests | `.skip`, `.only`, `xit`, `fit` | Fix or delete the test |
-| `playwright/no-skipped-test`, `playwright/no-focused-test` | Playwright specs | `test.skip`, `test.fixme`, `test.only` | Fix or delete the test |
+| `playwright/no-skipped-test`, `playwright/no-focused-test` | Playwright specs | `test.skip`, `test.fixme`, `test.only` (unconditional) | Fix or delete the test |
+| `allan/require-skip-reason` | tests | `test.skip(cond, …)`, `test.fixme(cond, …)`, `it.skipIf(cond)` with no adjacent reason comment | Fix the test so it can always run, or keep the skip and write a comment that names the real constraint |
 | `playwright/no-wait-for-timeout` | Playwright specs | `page.waitForTimeout()` | Wait for a locator, response or event |
-| `no-restricted-syntax` | tests and test runner configs | `retry` / `retries` keys | Fix the flake's root cause (missing await, race, shared state, real timers or network) |
+| `no-restricted-syntax` | tests and test runner configs | `retry` / `retries` keys other than literal `0` | Fix the flake's root cause (missing await, race, shared state, real timers or network) and delete the retry |
 
-`no-warning-comments` and the plugin rules print their own messages. The custom messages (`_unsafeUnwrap`, retries) name the root-cause fix.
+`no-warning-comments` and the plugin rules print their own messages. The custom messages (`_unsafeUnwrap`, retries, conditional skips) name the root-cause fix.
 
 ## Presets
 
@@ -22,7 +23,7 @@ Shared ESLint flat config (ESLint 9 and 10). It turns the mechanical review comm
 | --- | --- |
 | default | `base` + `testHygiene` |
 | `base` | throw ban, unwrap ban, warning comments, eslint-disable hygiene |
-| `testHygiene` | test-file rules only: no skipped, focused, sleeping or retried tests |
+| `testHygiene` | test-file rules only: no skipped, focused, sleeping or retried tests; literal `retries: 0` is allowed; a conditional skip needs a reason comment |
 
 Globs are named exports too: `edgeFileGlobs`, `testFileGlobs`, `playwrightFileGlobs`, `testConfigGlobs`.
 
@@ -94,6 +95,7 @@ Lints `fixtures/` with the full config and then with `testHygiene` alone. Each r
 
 ## Changelog
 
+- 1.1.2: `retries: 0` / `retry: 0` are allowed; non-zero values and expressions such as `process.env.CI ? 2 : 0` are still flagged. Conditional `test.skip(cond, …)` / `test.fixme(cond, …)` / `it.skipIf(cond)` are allowed only with an adjacent comment that says why. Plain `test.skip()` stays banned.
 - 1.1.1: `playwright/no-skipped-test` also bans `test.fixme`.
 - 1.1.0: test hygiene preset (Vitest, Playwright, retries), `_unsafeUnwrap` ban, warning-comment ban, eslint-disable descriptions; `base` and `testHygiene` exports; per-rule fixtures; CI on ESLint 9 and 10.
 - 1.0.0: `functional/no-throw-statements` with edge-file override.

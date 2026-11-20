@@ -6,3 +6,4 @@ test.only("focused", async ({ page }) => {
   await page.waitForTimeout(1000);
 });
 test.fixme("parked", async () => {});
+test.describe.configure({ retries: 0 });

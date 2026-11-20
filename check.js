@@ -5,6 +5,7 @@ import config, { testHygiene } from "./index.js";
 
 const unwrap = "throws on the wrong variant. Handle both cases";
 const retry = "Fix the root cause of the flake";
+const skipReason = "Fix the test so it can always run";
 
 const testFindings = [
   ["e2e/checkout.spec.ts:3", "no-restricted-syntax", retry],
@@ -12,10 +13,14 @@ const testFindings = [
   ["e2e/checkout.spec.ts:5", "playwright/no-focused-test"],
   ["e2e/checkout.spec.ts:6", "playwright/no-wait-for-timeout"],
   ["e2e/checkout.spec.ts:8", "playwright/no-skipped-test"],
+  ["e2e/conditional-skip.spec.ts:4", "allan/require-skip-reason", skipReason],
+  ["e2e/conditional-skip.spec.ts:5", "allan/require-skip-reason", skipReason],
+  ["expr/playwright.config.ts:1", "no-restricted-syntax", retry],
   ["playwright.config.ts:1", "no-restricted-syntax", retry],
   ["test/disabled.test.ts:4", "vitest/no-disabled-tests"],
   ["test/disabled.test.ts:5", "vitest/no-focused-tests"],
   ["test/disabled.test.ts:6", "no-restricted-syntax", retry],
+  ["test/disabled.test.ts:8", "allan/require-skip-reason", skipReason],
 ];
 
 const fullFindings = [
